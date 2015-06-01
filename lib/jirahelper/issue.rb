@@ -22,7 +22,8 @@ module JiraHelper
         summary: issue.summary,
         assigned: issue.assignee.displayName,
         priority: issue.priority.name,
-        status: issue.status.name)
+        status: issue.status.name,
+        url: issue.url)
     end
 
     def create_issue(project, subject, summary)

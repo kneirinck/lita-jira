@@ -34,7 +34,7 @@ en:
           email: "You are identified with JIRA as %{email}"
         issue:
           created: "Issue %{key} created"
-          details: "%{key}: %{summary}, assigned to: %{assigned}, priority: %{priority}, status: %{status}"
-          summary: "%{key}: %{summary}"
+          details: ">>>%{url}\n%{summary}, assigned to: %{assigned}, priority: %{priority}, status: %{status}"
+          summary: ">>>%{url}\n%{summary}"
         comment:
           added: "Comment added to %{issue}"
