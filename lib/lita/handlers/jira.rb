@@ -54,7 +54,7 @@ module Lita
       def summary(response)
         issue = fetch_issue(response.match_data['issue'])
         return response.reply(t('error.request')) unless issue
-        response.reply(t('issue.summary', key: issue.key, summary: issue.summary, url: issue.url))
+        response.reply(t('issue.summary', key: issue.key, summary: issue.summary, url: config.site + 'browse/' + issue.key))
       end
 
       def details(response)

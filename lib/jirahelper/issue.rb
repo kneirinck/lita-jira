@@ -23,7 +23,7 @@ module JiraHelper
         assigned: issue.assignee ? issue.assignee.displayName : 'Unassigned',
         priority: issue.priority.name,
         status: issue.status.name,
-        url: issue.url)
+        url: config.site + 'browse/' + issue.key)
     end
 
     def create_issue(project, subject, summary)
