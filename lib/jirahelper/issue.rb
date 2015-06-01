@@ -20,7 +20,7 @@ module JiraHelper
       t('issue.details',
         key: issue.key,
         summary: issue.summary,
-        assigned: issue.assignee.displayName,
+        assigned: issue.assignee ? issue.assignee.displayName : 'Unassigned',
         priority: issue.priority.name,
         status: issue.status.name,
         url: issue.url)
