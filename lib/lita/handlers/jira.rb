@@ -78,6 +78,11 @@ module Lita
         return response.reply(t('error.request')) unless issue
         response.reply(t('issue.created', key: issue.key))
       end
+      
+      Lita.register_hook(:before_run, -> (payload) do
+        ConfigurationBuilder.load_user_config(payload[:config_path])
+        route Regexp.new("#{Lita.config.handlers.jira.site}browse/#{ISSUE_PATTERN}"), :details
+      end)
     end
 
     Lita.register_handler(Jira)
