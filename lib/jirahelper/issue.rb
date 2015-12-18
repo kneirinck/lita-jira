@@ -26,13 +26,22 @@ module JiraHelper
         url: config.site + 'browse/' + issue.key)
     end
 
-    def create_issue(project, type, summary, description, reporter)
+    def create_issue(project, type, summary, description, reporter, components)
       issue = client.Issue.build
+      jira_components = []
+      if components.kind_of?(String)
+        for component in components.split(%r{,\s*})
+          jira_components.push({
+            name: component
+          })
+        end
+      end
       issue.save(fields: { summary: summary,
                            description: description.nil? ? "" : description,
                            project: { key: project },
                            issuetype: { name: type.capitalize },
-                           reporter: { name: reporter } })
+                           reporter: { name: reporter },
+                           components: jira_components })
       issue.fetch
       issue
     end

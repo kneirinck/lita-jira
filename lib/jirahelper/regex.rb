@@ -10,5 +10,6 @@ module JiraHelper
     PROJECT_PATTERN = /(?<project>[a-zA-Z0-9]{1,10})/
     ISSUE_PATTERN   = /(?<issue>#{PROJECT_PATTERN}-[0-9]{1,5}+)/
     EMAIL_PATTERN   = /(?<email>[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+)/i
+    COMPONENTS_PATTERN = /-components\s#{QUOTE_PATTERN}(?<components>.+?)#{QUOTE_PATTERN}/
   end
 end
