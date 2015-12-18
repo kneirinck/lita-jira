@@ -43,7 +43,7 @@ module Lita
       )
 
       route(
-        /^todo\s#{PROJECT_PATTERN}\s#{SUBJECT_PATTERN}(\s#{SUMMARY_PATTERN})?$/,
+        /^jira\screate\s#{TYPE_PATTERN}\s(for\s)?#{PROJECT_PATTERN}\s#{SUMMARY_PATTERN}(\s#{DESCRIPTION_PATTERN})?$/,
         :todo,
         command: true,
         help: {
@@ -73,8 +73,10 @@ module Lita
 
       def todo(response)
         issue = create_issue(response.match_data['project'],
-                             response.match_data['subject'],
-                             response.match_data['summary'])
+                             response.match_data['type'],
+                             response.match_data['summary'],
+                             response.match_data['description'],
+                             response.user.metadata['mention_name'])
         return response.reply(t('error.request')) unless issue
         response.reply(t('issue.created', key: issue.key))
       end

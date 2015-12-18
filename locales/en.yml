@@ -26,8 +26,8 @@ en:
             syntax: jira <issue>
             desc: Shows summary for <issue>
           todo:
-            syntax: todo <project> "<subject>" ["<summary>"]
-            desc: Creates an issue in <project> with <subject> and optionally <summary>
+            syntax: jira create <type> [for] <project> "<summary>" ["<description>"]
+            desc: Creates an issue of <type> in <project> with <summary> and optionally <description>
         identify:
           stored: "You have been identified as %{email} to JIRA"
           deleted: You have been de-identified from JIRA
