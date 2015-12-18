@@ -29,7 +29,7 @@ module JiraHelper
     def create_issue(project, type, summary, description, reporter)
       issue = client.Issue.build
       issue.save(fields: { summary: summary,
-                           description: description,
+                           description: description.nil? ? "" : description,
                            project: { key: project },
                            issuetype: { name: type.capitalize },
                            reporter: { name: reporter } })
