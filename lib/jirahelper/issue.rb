@@ -26,7 +26,7 @@ module JiraHelper
         url: config.site + 'browse/' + issue.key)
     end
 
-    def create_issue(project, type, summary, description, reporter, components)
+    def create_issue(project, type, summary, description, reporter, components, priority)
       issue = client.Issue.build
       jira_components = []
       if components.kind_of?(String)
@@ -41,7 +41,8 @@ module JiraHelper
                            project: { key: project },
                            issuetype: { name: type.capitalize },
                            reporter: { name: reporter },
-                           components: jira_components })
+                           components: jira_components,
+                           priority: { name: priority.nil? ? "Medium" : priority } })
       issue.fetch
       issue
     end

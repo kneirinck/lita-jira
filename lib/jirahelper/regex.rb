@@ -11,5 +11,6 @@ module JiraHelper
     ISSUE_PATTERN   = /(?<issue>#{PROJECT_PATTERN}-[0-9]{1,5}+)/
     EMAIL_PATTERN   = /(?<email>[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+)/i
     COMPONENTS_PATTERN = /-components\s#{QUOTE_PATTERN}(?<components>.+?)#{QUOTE_PATTERN}/
+    PRIORITY_PATTERN = /-priority\s#{QUOTE_PATTERN}(?<priority>.+?)#{QUOTE_PATTERN}/
   end
 end
