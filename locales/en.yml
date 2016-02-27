@@ -33,7 +33,7 @@ en:
           deleted: You have been de-identified from JIRA
           email: "You are identified with JIRA as %{email}"
         issue:
-          created: "Issue %{key} created"
+          created: "Issue %{url} created"
           details: ">>>%{url}\n%{summary}, assigned to: %{assigned}, priority: %{priority}, status: %{status}"
           summary: ">>>%{url}\n%{summary}"
         comment:

@@ -80,7 +80,7 @@ module Lita
                              response.match_data['components'],
                              response.match_data['priority'])
         return response.reply(t('error.request')) unless issue
-        response.reply(t('issue.created', key: issue.key))
+        response.reply(t('issue.created', url: config.site + 'browse/' + issue.key))
       end
 
       Lita.register_hook(:before_run, -> (payload) do
