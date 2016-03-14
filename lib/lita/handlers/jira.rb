@@ -43,7 +43,7 @@ module Lita
       )
 
       route(
-        /^jira\screate\s#{TYPE_PATTERN}\s(for\s)?#{PROJECT_PATTERN}\s#{SUMMARY_PATTERN}(\s#{DESCRIPTION_PATTERN})?(\s#{COMPONENTS_PATTERN})?(\s#{PRIORITY_PATTERN})?(\s#{ASSIGNEE_PATTERN})?$/,
+        /^jira\screate(\s#{TYPE_PATTERN})?(\s(for\s)?#{PROJECT_PATTERN})?(\s#{SUMMARY_PATTERN})?(\s#{DESCRIPTION_PATTERN})?(\s#{COMPONENTS_PATTERN})?(\s#{PRIORITY_PATTERN})?(\s#{ASSIGNEE_PATTERN})?(.*)$/,
         :todo,
         command: true,
         help: {
@@ -72,6 +72,14 @@ module Lita
       end
 
       def todo(response)
+        if response.match_data["type"].nil?
+          return response.reply(t('issue.missing.type'))
+        elsif response.match_data["project"].nil?
+          return response.reply(t('issue.missing.project'))
+        elsif response.match_data["summary"].nil?
+          return response.reply(t('issue.missing.summary'))
+        end
+
         issue = create_issue(response.match_data['project'],
                              response.match_data['type'],
                              response.match_data['summary'],
@@ -80,8 +88,13 @@ module Lita
                              response.match_data['components'],
                              response.match_data['priority'],
                              response.match_data['assignee'])
-        return response.reply(t('error.request')) unless issue
-        response.reply(t('issue.created', url: config.site + 'browse/' + issue.key))
+        if issue.nil? || (!issue.respond_to?("errors") && !issue.respond_to?("key"))
+            response.reply(t('error.issue'))
+        elsif issue.respond_to?("errors")
+          response.reply(t('error.create', error: issue.errors))
+        else
+          response.reply(t('issue.created', url: config.site + 'browse/' + issue.key))
+        end
       end
 
       Lita.register_hook(:before_run, -> (payload) do

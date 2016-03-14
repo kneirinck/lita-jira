@@ -6,6 +6,7 @@ en:
           already_identified: "You are already identified as %{email}"
           not_identified: You do not have an email address on record
           request: Error fetching JIRA issue
+          create: Error creating JIRA issue %{error}
         help:
           identify:
             syntax: jira identify <email address>
@@ -36,5 +37,9 @@ en:
           created: "Issue %{url} created"
           details: ">>>%{url}\n%{summary}, assigned to: %{assigned}, priority: %{priority}, status: %{status}"
           summary: ">>>%{url}\n%{summary}"
+          missing:
+            project: "Missing project name"
+            type: "Missing issue type"
+            summary: "Missing issue summary"
         comment:
           added: "Comment added to %{issue}"

@@ -50,8 +50,11 @@ module JiraHelper
         fields["assignee"] = { name: assignee }
       end
 
-      issue.save(fields: fields)
-      issue.fetch
+      begin
+        issue.save(fields: fields)
+        issue.fetch
+      rescue
+      end
       issue
     end
   end
