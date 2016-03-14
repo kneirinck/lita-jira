@@ -12,5 +12,6 @@ module JiraHelper
     EMAIL_PATTERN   = /(?<email>[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+)/i
     COMPONENTS_PATTERN = /-components\s#{QUOTE_PATTERN}(?<components>.+?)#{QUOTE_PATTERN}/
     PRIORITY_PATTERN = /-priority\s#{QUOTE_PATTERN}(?<priority>.+?)#{QUOTE_PATTERN}/
+    ASSIGNEE_PATTERN = /-assignee\s#{QUOTE_PATTERN}?(?<assignee>.+\..+?)#{QUOTE_PATTERN}?/
   end
 end

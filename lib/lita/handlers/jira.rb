@@ -43,7 +43,7 @@ module Lita
       )
 
       route(
-        /^jira\screate\s#{TYPE_PATTERN}\s(for\s)?#{PROJECT_PATTERN}\s#{SUMMARY_PATTERN}(\s#{DESCRIPTION_PATTERN})?(\s#{COMPONENTS_PATTERN})?(\s#{PRIORITY_PATTERN})?$/,
+        /^jira\screate\s#{TYPE_PATTERN}\s(for\s)?#{PROJECT_PATTERN}\s#{SUMMARY_PATTERN}(\s#{DESCRIPTION_PATTERN})?(\s#{COMPONENTS_PATTERN})?(\s#{PRIORITY_PATTERN})?(\s#{ASSIGNEE_PATTERN})?$/,
         :todo,
         command: true,
         help: {
@@ -78,7 +78,8 @@ module Lita
                              response.match_data['description'],
                              response.user.metadata['mention_name'],
                              response.match_data['components'],
-                             response.match_data['priority'])
+                             response.match_data['priority'],
+                             response.match_data['assignee'])
         return response.reply(t('error.request')) unless issue
         response.reply(t('issue.created', url: config.site + 'browse/' + issue.key))
       end

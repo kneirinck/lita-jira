@@ -26,7 +26,7 @@ module JiraHelper
         url: config.site + 'browse/' + issue.key)
     end
 
-    def create_issue(project, type, summary, description, reporter, components, priority)
+    def create_issue(project, type, summary, description, reporter, components, priority, assignee)
       issue = client.Issue.build
       jira_components = []
       if components.kind_of?(String)
@@ -36,13 +36,21 @@ module JiraHelper
           })
         end
       end
-      issue.save(fields: { summary: summary,
-                           description: description.nil? ? "" : description,
-                           project: { key: project },
-                           issuetype: { name: type.capitalize },
-                           reporter: { name: reporter },
-                           components: jira_components,
-                           priority: { name: priority.nil? ? "Medium" : priority } })
+
+      fields = {
+          summary: summary,
+          description: description.nil? ? "" : description,
+          project: { key: project },
+          issuetype: { name: type.capitalize },
+          reporter: { name: reporter },
+          components: jira_components,
+          priority: { name: priority.nil? ? "Medium" : priority }
+      }
+      if !assignee.nil?
+        fields["assignee"] = { name: assignee }
+      end
+
+      issue.save(fields: fields)
       issue.fetch
       issue
     end
