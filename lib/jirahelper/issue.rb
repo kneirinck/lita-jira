@@ -40,14 +40,14 @@ module JiraHelper
       fields = {
           summary: summary,
           description: description.nil? ? "" : description,
-          project: { key: project },
+          project: { key: project.upcase },
           issuetype: { name: type.capitalize },
-          reporter: { name: reporter },
+          reporter: { name: reporter.downcase },
           components: jira_components,
-          priority: { name: priority.nil? ? "Medium" : priority }
+          priority: { name: priority.nil? ? "Medium" : priority.capitalize }
       }
       if !assignee.nil?
-        fields["assignee"] = { name: assignee }
+        fields["assignee"] = { name: assignee.downcase }
       end
 
       begin
