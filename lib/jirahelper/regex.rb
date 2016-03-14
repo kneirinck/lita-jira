@@ -10,7 +10,7 @@ module JiraHelper
     PROJECT_PATTERN = /(?<project>[a-zA-Z0-9]{1,10})/
     ISSUE_PATTERN   = /(?<issue>#{PROJECT_PATTERN}-[0-9]{1,5}+)/
     EMAIL_PATTERN   = /(?<email>[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+)/i
-    COMPONENTS_PATTERN = /-component(s)\s#{QUOTE_PATTERN}?(?<components>\w+)#{QUOTE_PATTERN}?/
+    COMPONENTS_PATTERN = /-component(s)\s#{QUOTE_PATTERN}?(?<components>[\w\,]+)#{QUOTE_PATTERN}?/
     PRIORITY_PATTERN = /-priority\s#{QUOTE_PATTERN}?(?<priority>\w+)#{QUOTE_PATTERN}?/
     ASSIGNEE_PATTERN = /-assign(ee)?\s#{QUOTE_PATTERN}?(?<assignee>(\w+\.\w+))#{QUOTE_PATTERN}?/
   end
